@@ -142,20 +142,6 @@ d3.json(earthquakeData, function (response1) {
 
 
 function updateLegend() {
-
-    var svg = d3
-        .select(".legend")
-        .append("svg")
-
-    svg.selectAll("rect")
-        .data(colors)
-        .enter()
-            .append("rect")
-            .attr("x", 10)
-            .attr("y", 10)
-            .attr("fill", d => d)
-            .attr("opacity", "1");
-    
     document.querySelector(".legend").innerHTML = [
         "<p class='legend-title'><strong>Magnitude</strong></p>",
         "<p class='squares'><svg class='square zero'></svg>0-1</p>",
