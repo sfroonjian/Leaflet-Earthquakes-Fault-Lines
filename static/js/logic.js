@@ -9,6 +9,25 @@ plates = []
 // list of colors to use for bubbles
 colors = ["#b7f34e", "#e1f34c", "#f3db4c", "#f3ba4e", "#f0a76c", "#f16b6b"]
 
+function colorMag(mag) {
+    // sets the variable "color" to a certain color based on the magnitude
+    var color = ""
+    if (mag < 1) {
+        color = colors[0]
+    } else if (mag >= 1 && mag < 2) {
+        color = colors[1]
+    } else if (mag >= 2 && mag < 3) {
+        color = colors[2]
+    } else if (mag >= 3 && mag < 4) {
+        color = colors[3]
+    } else if (mag >= 4 && mag < 5) {
+        color = colors[4]
+    } else {
+        color = colors[5]
+    };
+    return color;
+}
+
 var geojson;
 
 // Grab earthquake data with d3
@@ -20,21 +39,6 @@ d3.json(earthquakeData, function (quakeResponse) {
         L.geoJSON(quakeResponse, {
             // goes through each "feature" object in the geojson
             onEachFeature: function (feature, layer) {
-                // sets the variable "color" to a certain color based on the magnitude
-                var color = ""
-                if (feature.properties.mag < 1) {
-                    color = colors[0]
-                } else if (feature.properties.mag >= 1 && feature.properties.mag < 2) {
-                    color = colors[1]
-                } else if (feature.properties.mag >= 2 && feature.properties.mag < 3) {
-                    color = colors[2]
-                } else if (feature.properties.mag >= 3 && feature.properties.mag < 4) {
-                    color = colors[3]
-                } else if (feature.properties.mag >= 4 && feature.properties.mag < 5) {
-                    color = colors[4]
-                } else {
-                    color = colors[5]
-                }
 
                 // adds a circle for each earthquake in json by grabbing the coordinates
                 magnitudes.push(
@@ -43,7 +47,7 @@ d3.json(earthquakeData, function (quakeResponse) {
                         weight: 1,
                         fillOpacity: 0.9,
                         color: "black",
-                        fillColor: color,
+                        fillColor: colorMag(feature.properties.mag),
                         // makes the radius of the circle based on the magnitude
                         radius: (feature.properties.mag * 50000)
                     })
@@ -136,17 +140,24 @@ d3.json(earthquakeData, function (quakeResponse) {
         }).addTo(myMap);
 
         // creates area for the legend
-        var info = L.control({
+        var legend = L.control({
             position: "bottomright"
         });
-    
+
         // creates a div in the html with the class "legend"
-        info.onAdd = function () {
+        legend.onAdd = function () {
             var div = L.DomUtil.create("div", "legend");
+
+            // for (var i = 0; i < colors.length; i++) {
+            //     div.innerHTML +=
+            //         '<i style="background:' + colors[i] + '"></i> ' +
+            //         grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            // }
+
             return div;
         };
         // Add the info legend to the map
-        info.addTo(myMap);
+        legend.addTo(myMap);
 
         // calls the update legend function
         updateLegend();
@@ -160,11 +171,11 @@ function updateLegend() {
         // adds a paragraph for each magnitude range
         // and an svg that will display a box with the corresponding color
         "<p class='legend-title'><strong>Magnitude</strong></p>",
-        "<p class='key'><svg class='square zero'></svg>0-1</p>",
-        "<p class='key'><svg class='square one'></svg>1-2</p>",
-        "<p class='key'><svg class='square two'></svg>2-3</p>",
-        "<p class='key'><svg class='square three'></svg>3-4</p>",
-        "<p class='key'><svg class='square four'></svg>4-5</p>",
-        "<p class='key'><svg class='square five'></svg>5+</p>",
+        "<p class='key'><svg class='square' style='background:" + colors[0] + "'></svg>0-1</p>",
+        "<p class='key'><svg class='square' style='background:" + colors[1] + "'></svg>1-2</p>",
+        "<p class='key'><svg class='square' style='background:" + colors[2] + "'></svg>2-3</p>",
+        "<p class='key'><svg class='square' style='background:" + colors[3] + "'></svg>3-4</p>",
+        "<p class='key'><svg class='square' style='background:" + colors[4] + "'></svg>4-5</p>",
+        "<p class='key'><svg class='square' style='background:" + colors[5] + "'></svg>5+</p>",
     ].join("");
 }

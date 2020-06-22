@@ -31,26 +31,8 @@ html {
   margin: 0 10px 0 0;
 }
 
-.zero {
-  background-color: #b7f34e;
-}
-
-.one {
-  background-color: #e1f34c;
-}
-
-.two {
-  background-color: #f3db4c;
-}
-
-.three {
-  background-color: #f3ba4e;
-}
-
-.four {
-  background-color: #f0a76c;
-}
-
-.five {
-  background-color: #f16b6b;
+i {
+  height: 16px;
+  width: 16px;
+  margin: 10px;
 }
