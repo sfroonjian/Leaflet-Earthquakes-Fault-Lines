@@ -144,38 +144,24 @@ d3.json(earthquakeData, function (quakeResponse) {
             position: "bottomright"
         });
 
-        // creates a div in the html with the class "legend"
         legend.onAdd = function () {
-            var div = L.DomUtil.create("div", "legend");
 
-            // for (var i = 0; i < colors.length; i++) {
-            //     div.innerHTML +=
-            //         '<i style="background:' + colors[i] + '"></i> ' +
-            //         grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-            // }
+            mags = [0, 1, 2, 3, 4, 5]
+            // creates a div in the html with the class "legend"
+            var div = L.DomUtil.create("div", "legend");
+            // adds heading to legend
+            div.innerHTML = "<p class='legend-title'><strong>Magnitude</strong></p>"
+
+            // adds an item to the legend for each color and what magnitude it represents
+            for (var i = 0; i < colors.length; i++) {
+                div.innerHTML +=
+                    '<svg class="squares" style="background:' + colorMag(i) + '"></svg>' +
+                    mags[i] + (mags[i+1] ? '-' + mags[i+1] + '<br>' : '+');
+            }
 
             return div;
         };
         // Add the info legend to the map
         legend.addTo(myMap);
-
-        // calls the update legend function
-        updateLegend();
     });
 });
-
-
-function updateLegend() {
-    // selects the div with the class "legend"
-    document.querySelector(".legend").innerHTML = [
-        // adds a paragraph for each magnitude range
-        // and an svg that will display a box with the corresponding color
-        "<p class='legend-title'><strong>Magnitude</strong></p>",
-        "<p class='key'><svg class='square' style='background:" + colors[0] + "'></svg>0-1</p>",
-        "<p class='key'><svg class='square' style='background:" + colors[1] + "'></svg>1-2</p>",
-        "<p class='key'><svg class='square' style='background:" + colors[2] + "'></svg>2-3</p>",
-        "<p class='key'><svg class='square' style='background:" + colors[3] + "'></svg>3-4</p>",
-        "<p class='key'><svg class='square' style='background:" + colors[4] + "'></svg>4-5</p>",
-        "<p class='key'><svg class='square' style='background:" + colors[5] + "'></svg>5+</p>",
-    ].join("");
-}

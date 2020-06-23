@@ -20,19 +20,8 @@ html {
   margin: 0 0 7px 0;
 }
 
-.key {
-  margin: 0;
-  line-height: 0.8;
-}
-
-.square {
+.squares {
   height: 16px;
   width: 16px;
-  margin: 0 10px 0 0;
-}
-
-i {
-  height: 16px;
-  width: 16px;
-  margin: 10px;
+  margin: 0 7px 0 0;
 }
