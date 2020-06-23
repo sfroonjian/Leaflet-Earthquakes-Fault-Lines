@@ -1,5 +1,5 @@
 ### Purpose of this analysis:
-The purpose of this project is to creates a tool that will allow people to visualize the United States Geological Survey's (USGS) earthquake data. They collect a massive amount of data from all over the world each day, and this app will probide a meaningful way of displaying it to educate the public on issues facing our planet. Specifically, it will provide maps that display plate boundaries and information on recent earthquakes, so people can visualize where earthquakes are most likely to occur.
+The purpose of this project is to create a tool that will allow people to visualize the United States Geological Survey's (USGS) earthquake data. They collect a massive amount of data from all over the world each day, and this app provides a meaningful way of displaying it to educate the public on issues facing our planet. Specifically, it provides maps that display fault lines and information on recent earthquakes, so people can visualize where earthquakes are most likely to occur.
 
 ---
 
